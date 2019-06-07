@@ -1,22 +1,19 @@
 command: bash
+script: script.sh
 env:
   base:
-  - {image: debian:stretch, pkg-manager: apt}
+    - image: 'ubuntu:16.04'
+      pkg-manager: apt
+  fsl:
+    - version: 5.0.9
   miniconda:
-  - {conda_install: ['python=3.7']}
-  - {conda_install: ['python=2.7']}
-inputs:
-- []
-plots:
-- function: scatter_all
-  var_list: []
-- function: scatter_2var
-  var_list:
-  - []
-- function: barplot_all_rel_error
-  var_list: []
-script: div_list.py
-tests:
-- file: []
-  name: regr
-  script: test_noerror.py
+    - conda_install:
+        - python=3.6
+        - numpy
+# env_add:
+#  copy:
+#    - /Users/dorota/niflow-manager/niflow-coastalcoding-example/package
+#    - /pack
+
+#tests:
+# - {file: output_array.npy, name: test0, script: test_obj_eq.py}
