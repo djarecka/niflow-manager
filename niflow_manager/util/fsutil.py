@@ -26,6 +26,9 @@ def copytree(src, dst, *, policy=CopyPolicy.IGNORE, mapping=None):
         sub_dst = dst / sub_src.name.format(**mapping)
         if sub_src.is_dir():
             copytree(sub_src, sub_dst, policy=policy, mapping=mapping)
+        # todo: format(**mapping) doesn't work for my yaml files
+        elif sub_src.suffix == ".yaml":
+            shutil.copyfile(sub_src, sub_dst)
         else:
             sd_exists = sub_dst.exists()
             if sd_exists:
