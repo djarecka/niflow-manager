@@ -58,7 +58,10 @@ def neurodocker_dict(workflow_path):
         # if post build not provided, it will use the default one that installs niflow-manager
         # and the package (after coping it first)
         post_build["copy"] = [".", "/nfm"]
-        post_build["miniconda"] = {"pip_install": ["niflow-manager", "/nfm/package/"]}
+        post_build["miniconda"] = {"pip_install": ["niflow-manager"]}
+        post_build["run_bash"] = "/opt/miniconda-latest/envs/testkraken/bin/nfm install /nfm/package/"
+        #post_build["user"] = "testkraken"
+        #post_build["run_bash"] = "nfm --help"
 
     for key, spec in post_build.items():
         if key == "miniconda":
@@ -134,6 +137,7 @@ def docker_image(workflow_path, working_dir=None):
     if dockerfile.exists():
         dockerfile.unlink()
     jsonfile = working_dir / f"nrd_spec.json"
+    print("JSON", jsonfile)
     if jsonfile.exists():
         jsonfile.exists()
 
