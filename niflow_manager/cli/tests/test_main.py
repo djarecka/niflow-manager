@@ -4,6 +4,8 @@ from pathlib import Path
 import subprocess as sp
 from .. import main
 
+# test
+
 
 @pytest.mark.parametrize("option", ["--help", "--version"])
 def test_utility_options(option):
